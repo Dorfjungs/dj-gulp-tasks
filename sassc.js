@@ -7,7 +7,7 @@ module.exports = (config) => {
 		for (var i = 0, len = config.files.length; i < len; i++) {
 			var files = config.files[i];
 			var stream = gulp.src(files.entry)
-				.pipe(run('sassc -t compressed -I ' + config.watch, {verbosity: 1}))
+				.pipe(run('sassc -t compressed -I ' + config.watch + (config.paths ? (':' + config.paths.join(':')) : ''), {verbosity: 1}))
 				.on('error', (err) => { stream.end(); })
 			    .pipe(rename((path) => { path.extname = ".css"; }))
 			    .pipe(gulp.dest(files.output));
