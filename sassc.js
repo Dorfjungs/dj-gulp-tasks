@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const rename = require('gulp-rename');
+const ignore = require('gulp-ignore');
 const run = require('gulp-run');
-const exec = require('gulp-exec');
 
 module.exports = (config) => {
 	gulp.task('sassc-compile', (callback) => {
@@ -13,7 +13,8 @@ module.exports = (config) => {
 					let files = config.files[i];
 					let paths = config.watch + (config.paths ? (':' + config.paths.join(':')) : '');
 					let stream = gulp.src(files.entry)
-						.pipe(run('sassc -t compressed -I ' + paths, {verbosity: 1}))
+						.pipe(ignore.exclude('**/_*.scss'))
+						.pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}))
 						.on('error', (err) => {stream.end();reject(err);})
 						.pipe(rename((path) => { path.extname = ".css"; }))
 						.pipe(gulp.dest(files.output))
@@ -26,7 +27,7 @@ module.exports = (config) => {
 	});
 
 	gulp.task('sassc-watch', () => {
-		gulp.watch(config.watch + '/*.scss', ['sassc-compile'])
+		gulp.watch(config.watch + '/**/*.scss', ['sassc-compile'])
 	});
 
 	gulp.task('sassc', ['sassc-watch']);
