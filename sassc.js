@@ -13,6 +13,7 @@ module.exports = (config) => {
 					let files = config.files[i];
 					let paths = config.watch + (config.paths ? (':' + config.paths.join(':')) : '');
 					let stream = gulp.src(files.entry)
+						.pipe(ignore.exclude('_*.scss'))
 						.pipe(ignore.exclude('**/_*.scss'))
 						.pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}))
 						.on('error', (err) => {stream.end();reject(err);})
