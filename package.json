@@ -1,6 +1,6 @@
 {
 	"name": "dj-gulp-tasks",
-	"version": "1.0.07",
+	"version": "1.0.08",
 	"description": "Common gulp tasks",
 	"keywords": ["gulp", "common", "tasks"],
 	"homepage": "https://github.com/Dorfjungs/dj-gulp-tasks",
@@ -19,6 +19,7 @@
 	"dependencies": {
 		"gulp-rename": "*",
 		"gulp-run": "*",
-		"gulp-ignore": "*"
+		"gulp-ignore": "*",
+		"gulp-watch": "*"
 	}
 }
