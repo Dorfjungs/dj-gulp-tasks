@@ -29,7 +29,7 @@ module.exports = (config) => {
 	});
 
 	gulp.task('sassc-watch', () => {
-		gulp.watch(config.watch + '/**/*.scss', function(){
+		watch(config.watch + '/**/*.scss', function(){
 			gulp.start('sassc-compile');
 		});
 	});
