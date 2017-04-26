@@ -4,8 +4,10 @@ const ignore = require('gulp-ignore');
 const watch = require('gulp-watch');
 const run = require('gulp-run');
 
-module.exports = (config) => {
-	gulp.task('sassc-compile', (callback) => {
+module.exports = (config, optPostfix) => {
+	var postfix = optPostfix ? ('-' + optPostfix) : '';
+
+	gulp.task('dj-sassc-compile' + postfix, (callback) => {
 		setTimeout(() => {
 			let promises = [];
 
@@ -28,11 +30,11 @@ module.exports = (config) => {
 		}, !isNaN(config.timeout) ? config.timeout : 50);
 	});
 
-	gulp.task('sassc-watch', () => {
+	gulp.task('dj-sassc-watch' + postfix, () => {
 		watch(config.watch + '/**/*.scss', function(){
-			gulp.start('sassc-compile');
+			gulp.start('dj-sassc-compile' + postfix);
 		});
 	});
 
-	gulp.task('sassc', ['sassc-watch']);
+	gulp.task('dj-sassc' + postfix, ['dj-sassc-watch' + postfix]);
 };

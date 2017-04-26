@@ -1,25 +1,31 @@
 {
-	"name": "dj-gulp-tasks",
-	"version": "1.0.10",
-	"description": "Common gulp tasks",
-	"keywords": ["gulp", "common", "tasks"],
-	"homepage": "https://github.com/Dorfjungs/dj-gulp-tasks",
-	"repository": "https://github.com/Dorfjungs/dj-gulp-tasks",
-	"contributors": [
-		{
-			"name": "Davide Perozzi",
-			"email": "davide@dorfjungs.com",
-			"url": "http://dorfjungs.com/"
-		}
-	],
-	"license": {
-		"type": "MIT",
-    	"url": "http://www.opensource.org/licenses/mit-license.php"
-	},
-	"dependencies": {
-		"gulp-rename": "*",
-		"gulp-run": "*",
-		"gulp-ignore": "*",
-		"gulp-watch": "*"
-	}
+  "name": "dj-gulp-tasks",
+  "version": "1.0.50",
+  "description": "Common gulp tasks",
+  "keywords": [
+    "gulp",
+    "common",
+    "tasks"
+  ],
+  "homepage": "https://github.com/Dorfjungs/dj-gulp-tasks",
+  "repository": "https://github.com/Dorfjungs/dj-gulp-tasks",
+  "contributors": [
+    {
+      "name": "Davide Perozzi",
+      "email": "davide@dorfjungs.com",
+      "url": "http://dorfjungs.com/"
+    }
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
+  "devDependencies": {
+    "google-closure-compiler": "^20170409.0.0",
+    "gulp-closure-deps": "^0.4.0",
+    "gulp-ignore": "^2.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-run": "^1.7.1",
+    "gulp-watch": "^4.3.11"
+  }
 }
