@@ -1,6 +1,6 @@
 {
   "name": "dj-gulp-tasks",
-  "version": "1.0.50",
+  "version": "1.0.51",
   "description": "Common gulp tasks",
   "keywords": [
     "gulp",
@@ -20,7 +20,7 @@
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
   },
-  "devDependencies": {
+  "dependencies": {
     "google-closure-compiler": "^20170409.0.0",
     "gulp-closure-deps": "^0.4.0",
     "gulp-ignore": "^2.0.2",
