@@ -6,10 +6,8 @@ const run = require('gulp-run');
 const windows = /^win/.test(process.platform);
 const pathSep = windows ? ';' : ':';
 
-module.exports = (config, optPostfix) => {
-    var postfix = optPostfix ? ('-' + optPostfix) : '';
-
-    gulp.task('dj-sassc-compile' + postfix, (callback) => {
+module.exports = {
+    compile: (config, callback) => {
         setTimeout(() => {
             let promises = [];
 
@@ -33,14 +31,24 @@ module.exports = (config, optPostfix) => {
                 }));
             }
 
-            Promise.all(promises).then(() => callback());
+            Promise.all(promises).then(() => callback ? callback() : {});
         }, !isNaN(config.timeout) ? config.timeout : 50);
+    },
+    watch: (config, callback) => {
+        return watch(config.watch + '/**/*.scss', callback);
+    }
+};
+
+/** @depcrecated */
+module.exports.default = (config, optPostfix) => {
+    var postfix = optPostfix ? ('-' + optPostfix) : '';
+
+    gulp.task('dj-sassc-compile' + postfix, (callback) => {
+        return module.exports.compile(config, callback);
     });
 
     gulp.task('dj-sassc-watch' + postfix, () => {
-        watch(config.watch + '/**/*.scss', function(){
-            gulp.start('dj-sassc-compile' + postfix);
-        });
+        return module.exports.watch(config, () => gulp.start('dj-sassc-compile' + postfix));
     });
 
     gulp.task('dj-sassc' + postfix, ['dj-sassc-watch' + postfix]);
