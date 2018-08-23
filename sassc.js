@@ -24,10 +24,15 @@ module.exports = {
                         .pipe(ignore.exclude('_*.scss'))
                         .pipe(ignore.exclude('**/_*.scss'))
                         .pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}))
-                        .on('error', (err) => {stream.end()})
-                        .pipe(rename((path) => { path.extname = ".css"; }))
-                        .pipe(gulp.dest(files.output))
-                        .on('finish', () => {setTimeout(resolve, 0);});
+                        .on('error', (err) => {
+                            stream.end()
+                        })
+                        .pipe(rename((path) => {path.extname = ".css"; }))
+                        .on('finish', () => {
+                            setTimeout(resolve, 0);
+                        })
+                        .pipe(gulp.dest(files.output));
+
                 }));
             }
 
