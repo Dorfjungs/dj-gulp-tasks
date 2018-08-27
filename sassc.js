@@ -20,13 +20,12 @@ module.exports = {
                         paths = paths.replace(/\.\//g, '');
                     }
 
-                    let stream = gulp.src(files.entry)
+                    gulp.src(files.entry)
                         .pipe(ignore.exclude('_*.scss'))
                         .pipe(ignore.exclude('**/_*.scss'))
-                        .pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}))
-                        .on('error', (err) => {
-                            stream.end()
-                        })
+                        .pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}).on('error', (error) => {
+                            setTimeout(resolve, 0);
+                        }))
                         .pipe(rename((path) => {path.extname = ".css"; }))
                         .on('finish', () => {
                             setTimeout(resolve, 0);
