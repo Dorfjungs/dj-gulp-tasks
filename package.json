@@ -1,6 +1,6 @@
 {
   "name": "@dorfjungs/base-gulp-tasks",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Common gulp tasks",
   "keywords": [
     "gulp",
@@ -20,6 +20,7 @@
   "dependencies": {
     "google-closure-compiler": "^20180204.0.0",
     "gulp-closure-deps": "^0.4.0",
+    "gulp-flatmap": "^1.0.2",
     "gulp-ignore": "^2.0.2",
     "gulp-shell": "^0.6.5",
     "gulp-watch": "^4.3.11"
