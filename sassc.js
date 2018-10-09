@@ -1,8 +1,9 @@
 const gulp = require('gulp');
-const rename = require('gulp-rename');
+const path = require('path');
 const ignore = require('gulp-ignore');
 const watch = require('gulp-watch');
-const run = require('gulp-run');
+const shell = require('gulp-shell');
+const flatmap = require('gulp-flatmap');
 const windows = /^win/.test(process.platform);
 const pathSep = windows ? ';' : ':';
 
@@ -23,15 +24,14 @@ module.exports = {
                     gulp.src(files.entry)
                         .pipe(ignore.exclude('_*.scss'))
                         .pipe(ignore.exclude('**/_*.scss'))
-                        .pipe(run('sassc -s -t compressed -I ' + paths, {verbosity: 1}).on('error', (error) => {
-                            setTimeout(resolve, 0);
-                        }))
-                        .pipe(rename((path) => {path.extname = ".css"; }))
-                        .on('finish', () => {
-                            setTimeout(resolve, 0);
-                        })
-                        .pipe(gulp.dest(files.output));
+                        .pipe(flatmap((stream, file) => {
+                            const filename = path.parse(file.path).name;
 
+                            return stream.pipe(
+                                shell(`sassc -t compressed -I ${paths} ${file.path} ${files.output}/${filename}.css`, { verbose: true })
+                            );
+                        }))
+                        .on('error', () => setTimeout(resolve, 0))
                 }));
             }
 
