@@ -32,6 +32,7 @@ module.exports = {
                             );
                         }))
                         .on('error', () => setTimeout(resolve, 0))
+                        .on('finish', () => setTimeout(resolve, 0));
                 }));
             }
 
