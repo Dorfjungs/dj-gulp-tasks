@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const watch = require('gulp-watch');
-const closureDeps = require('gulp-closure-deps');
+const rename = require('gulp-rename');
+const closureDeps = require('gulp-google-closure-deps');
 const closureCompiler = require('google-closure-compiler').gulp();
 
 module.exports = {
@@ -10,10 +11,8 @@ module.exports = {
 		var outputPath = outputParts.join('/');
 
         return gulp.src(config.files)
-            .pipe(closureDeps({
-                'fileName': fileName,
-                'prefix': config.prefix
-            }))
+            .pipe(closureDeps({ 'closurePath': config.closurePath }))
+            .pipe(rename(fileName))
             .pipe(gulp.dest(outputPath));
     },
     depsWatch: (config, callback) => {
