@@ -9,7 +9,7 @@ module.exports = {
     // contains a bug, where the files will not be resetted unless
     // you reimport this module. So in order to do that, we
     // (re)import it here and clear the require cache from node
-    const closureDeps = require('gulp-google-closure-deps');
+    const closureDeps = require('./closure-deps');
 
     var outputParts = config.output.split('/');
     var fileName = outputParts.pop();
@@ -23,7 +23,7 @@ module.exports = {
       .pipe(gulp.dest(outputPath))
       .on('end', () => {
         delete require.cache[
-          require.resolve('gulp-google-closure-deps')
+          require.resolve('./closure-deps')
         ];
       });
   },
